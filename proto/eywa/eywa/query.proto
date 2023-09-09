@@ -72,7 +72,7 @@ message QueryGetRelayServerRequest {
 }
 
 message QueryGetRelayServerResponse {
-  RelayServer                            relayServer = 1;
+  repeated RelayServer                            relayServer = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination  = 2;
 }
 
