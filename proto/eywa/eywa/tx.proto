@@ -6,7 +6,8 @@ option go_package = "eywa/x/eywa/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc RegisterUser (MsgRegisterUser) returns (MsgRegisterUserResponse);
+  rpc RegisterUser    (MsgRegisterUser   ) returns (MsgRegisterUserResponse   );
+  rpc CreateHandshake (MsgCreateHandshake) returns (MsgCreateHandshakeResponse);
 }
 message MsgRegisterUser {
   string creator = 1;
@@ -16,4 +17,13 @@ message MsgRegisterUser {
 message MsgRegisterUserResponse {
   uint64 id = 1;
 }
+
+message MsgCreateHandshake {
+  string creator       = 1;
+  string receiver      = 2;
+  string roomId        = 3;
+  string serverAddress = 4;
+}
+
+message MsgCreateHandshakeResponse {}
 
