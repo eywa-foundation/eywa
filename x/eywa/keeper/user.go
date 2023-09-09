@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"encoding/binary"
 	"eywa/x/eywa/types"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
@@ -9,39 +8,17 @@ import (
 )
 
 func (k Keeper) CreateUser(ctx sdk.Context, user types.User) uint64 {
-	count := k.GetUserCount(ctx)
-	user.Id = count
+	user.Id = 0
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.UserKey))
 	appendedValue := k.cdc.MustMarshal(&user)
-	store.Set(GetUserIDBytes(user.Id), appendedValue)
-	k.SetUserCount(ctx, count+1)
-	return count
+	store.Set(GetUserAddressBytes(user.Submitter), appendedValue)
+	return user.Id
 }
 
-func (k Keeper) GetUserCount(ctx sdk.Context) uint64 {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.UserCountKey)
-	bz := store.Get(byteKey)
-	if bz == nil {
-		return 0
-	}
-	return binary.BigEndian.Uint64(bz)
-}
-
-func (k Keeper) SetUserCount(ctx sdk.Context, count uint64) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.UserCountKey)
-	bz := make([]byte, 8)
-	binary.BigEndian.PutUint64(bz, count)
-	store.Set(byteKey, bz)
-}
-
-func (k Keeper) GetUserByAddress(ctx sdk.Context, id uint64) (val types.User, found bool) {
+func (k Keeper) GetUserByAddress(ctx sdk.Context, submitter string) (val types.User, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.UserKey))
 
-	key := []byte(val.Submitter)
-
-	b := store.Get(key)
+	b := store.Get(GetUserAddressBytes(submitter))
 	if b == nil {
 		return val, false
 	}
@@ -49,8 +26,6 @@ func (k Keeper) GetUserByAddress(ctx sdk.Context, id uint64) (val types.User, fo
 	return val, true
 }
 
-func GetUserIDBytes(id uint64) []byte {
-	bz := make([]byte, 8)
-	binary.BigEndian.PutUint64(bz, id)
-	return bz
+func GetUserAddressBytes(submitter string) []byte {
+	return []byte(submitter)
 }

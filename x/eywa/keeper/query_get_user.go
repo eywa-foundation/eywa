@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"eywa/x/eywa/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -16,8 +17,10 @@ func (k Keeper) GetUser(goCtx context.Context, req *types.QueryGetUserRequest) (
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	user, found := k.GetUserByAddress(ctx, req.Submitter)
+	if !found {
+		return nil, status.Error(codes.InvalidArgument, "not found")
+	}
 
-	return &types.QueryGetUserResponse{}, nil
+	return &types.QueryGetUserResponse{User: &user}, nil
 }
