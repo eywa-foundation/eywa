@@ -70,3 +70,17 @@ curl https://get.ignite.com/username/eywa@latest! | sudo bash
 ```bash
   eywad q eywa get-user [Address]
 ```
+
+## Handshake
+
+### Create Handshake
+
+```bash
+  eywad tx eywa create-handshake [Receiver] [RoomId] [ServerAddress] --from alice
+```
+
+### Get Handshake By Receiver
+
+```bash
+  eywad q eywa get-handshake [Receiver]
+```
