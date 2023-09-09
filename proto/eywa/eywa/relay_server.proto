@@ -1,0 +1,11 @@
+syntax = "proto3";
+package eywa.eywa;
+
+option go_package = "eywa/x/eywa/types";
+
+message RelayServer {
+  
+  string nickname = 1; 
+  string relayAccount = 2; 
+  string location = 3; 
+}
