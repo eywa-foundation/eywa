@@ -36,6 +36,19 @@ func (k Keeper) SetUserCount(ctx sdk.Context, count uint64) {
 	store.Set(byteKey, bz)
 }
 
+func (k Keeper) GetUserByAddress(ctx sdk.Context, id uint64) (val types.User, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.UserKey))
+
+	key := []byte(val.Submitter)
+
+	b := store.Get(key)
+	if b == nil {
+		return val, false
+	}
+	k.cdc.MustUnmarshal(b, &val)
+	return val, true
+}
+
 func GetUserIDBytes(id uint64) []byte {
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, id)
