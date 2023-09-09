@@ -35068,14 +35068,16 @@ paths:
             type: object
             properties:
               relayServer:
-                type: object
-                properties:
-                  nickname:
-                    type: string
-                  relayAccount:
-                    type: string
-                  location:
-                    type: string
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nickname:
+                      type: string
+                    relayAccount:
+                      type: string
+                    location:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -70944,14 +70946,16 @@ definitions:
     type: object
     properties:
       relayServer:
-        type: object
-        properties:
-          nickname:
-            type: string
-          relayAccount:
-            type: string
-          location:
-            type: string
+        type: array
+        items:
+          type: object
+          properties:
+            nickname:
+              type: string
+            relayAccount:
+              type: string
+            location:
+              type: string
       pagination:
         type: object
         properties:

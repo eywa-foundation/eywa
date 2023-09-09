@@ -94,3 +94,20 @@ curl https://get.ignite.com/username/eywa@latest! | sudo bash
 ```
 
 - Receiver : Receiver 지갑주소
+
+## Relay server
+
+### Create Relay Server
+
+```bash
+  eywad tx eywa create-relay-server [Nickname] [Location] --from alice
+```
+
+- Nickname : Relay Server 닉네임
+- Location : Relay Server 주소 (ip , domain)
+
+### Get Relay Server All
+
+```bash
+  eywad q eywa get-relay-server-all
+```
