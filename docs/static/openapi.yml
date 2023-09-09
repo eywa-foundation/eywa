@@ -70761,6 +70761,8 @@ definitions:
         type: string
   eywa.eywa.MsgCreateHandshakeResponse:
     type: object
+  eywa.eywa.MsgCreateRelayServerResponse:
+    type: object
   eywa.eywa.MsgRegisterUserResponse:
     type: object
     properties:

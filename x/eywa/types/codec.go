@@ -10,6 +10,7 @@ import (
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRegisterUser{}, "eywa/RegisterUser", nil)
 	cdc.RegisterConcrete(&MsgCreateHandshake{}, "eywa/CreateHandshake", nil)
+	cdc.RegisterConcrete(&MsgCreateRelayServer{}, "eywa/CreateRelayServer", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -19,6 +20,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateHandshake{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateRelayServer{},
 	)
 	// this line is used by starport scaffolding # 3
 

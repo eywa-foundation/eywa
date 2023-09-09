@@ -6,8 +6,9 @@ option go_package = "eywa/x/eywa/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc RegisterUser    (MsgRegisterUser   ) returns (MsgRegisterUserResponse   );
-  rpc CreateHandshake (MsgCreateHandshake) returns (MsgCreateHandshakeResponse);
+  rpc RegisterUser      (MsgRegisterUser     ) returns (MsgRegisterUserResponse     );
+  rpc CreateHandshake   (MsgCreateHandshake  ) returns (MsgCreateHandshakeResponse  );
+  rpc CreateRelayServer (MsgCreateRelayServer) returns (MsgCreateRelayServerResponse);
 }
 message MsgRegisterUser {
   string creator = 1;
@@ -26,4 +27,12 @@ message MsgCreateHandshake {
 }
 
 message MsgCreateHandshakeResponse {}
+
+message MsgCreateRelayServer {
+  string creator  = 1;
+  string nickname = 2;
+  string location = 3;
+}
+
+message MsgCreateRelayServerResponse {}
 

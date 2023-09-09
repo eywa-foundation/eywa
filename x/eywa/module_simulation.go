@@ -31,6 +31,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateHandshake int = 100
 
+	opWeightMsgCreateRelayServer = "op_weight_msg_create_relay_server"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateRelayServer int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -81,6 +85,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		eywasimulation.SimulateMsgCreateHandshake(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCreateRelayServer int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateRelayServer, &weightMsgCreateRelayServer, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateRelayServer = defaultWeightMsgCreateRelayServer
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateRelayServer,
+		eywasimulation.SimulateMsgCreateRelayServer(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -102,6 +117,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateHandshake,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				eywasimulation.SimulateMsgCreateHandshake(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateRelayServer,
+			defaultWeightMsgCreateRelayServer,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				eywasimulation.SimulateMsgCreateRelayServer(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
