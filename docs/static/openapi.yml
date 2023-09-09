@@ -34934,21 +34934,23 @@ paths:
             type: object
             properties:
               chat:
-                type: object
-                properties:
-                  chatIndex:
-                    type: string
-                  roomId:
-                    type: string
-                  sender:
-                    type: string
-                  receiver:
-                    type: string
-                  message:
-                    type: string
-                  time:
-                    type: string
-                    format: uint64
+                type: array
+                items:
+                  type: object
+                  properties:
+                    chatIndex:
+                      type: string
+                    roomId:
+                      type: string
+                    sender:
+                      type: string
+                    receiver:
+                      type: string
+                    message:
+                      type: string
+                    time:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -71055,21 +71057,23 @@ definitions:
     type: object
     properties:
       chat:
-        type: object
-        properties:
-          chatIndex:
-            type: string
-          roomId:
-            type: string
-          sender:
-            type: string
-          receiver:
-            type: string
-          message:
-            type: string
-          time:
-            type: string
-            format: uint64
+        type: array
+        items:
+          type: object
+          properties:
+            chatIndex:
+              type: string
+            roomId:
+              type: string
+            sender:
+              type: string
+            receiver:
+              type: string
+            message:
+              type: string
+            time:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:

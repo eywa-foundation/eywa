@@ -111,3 +111,24 @@ curl https://get.ignite.com/username/eywa@latest! | sudo bash
 ```bash
   eywad q eywa get-relay-server-all
 ```
+
+## Chat Room
+
+### Create Chat Room
+
+```bash
+  eywad tx eywa create-chat-room [RoomId] [Receiver] [Message] [Time] --from alice
+```
+
+- RoomId : Chat Room Id
+- Receiver : Receiver 지갑주소
+- Message : 메세지
+- Time : 메세지 보낸 시간
+
+### Get Chat Room By RoomId
+
+```bash
+  eywad q eywa get-chat-room [RoomId]
+```
+
+- RoomId : Chat Room Id
