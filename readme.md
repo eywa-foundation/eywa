@@ -65,11 +65,15 @@ curl https://get.ignite.com/username/eywa@latest! | sudo bash
   eywad tx eywa register-user [PubKey] --from alice
 ```
 
+- PubKey : User 공개키
+
 ### Get User By Address
 
 ```bash
   eywad q eywa get-user [Address]
 ```
+
+- Address : USer 지갑주소
 
 ## Handshake
 
@@ -79,8 +83,14 @@ curl https://get.ignite.com/username/eywa@latest! | sudo bash
   eywad tx eywa create-handshake [Receiver] [RoomId] [ServerAddress] --from alice
 ```
 
+- Receiver : Receiver 지갑주소
+- RoomId : Chat Room Id
+- ServerAddress : Server 주소 (혹은 도메인 혹은 이름 뭐가 되도 liter sting이라 그냥 적어주면 됨)
+
 ### Get Handshake By Receiver
 
 ```bash
   eywad q eywa get-handshake [Receiver]
 ```
+
+- Receiver : Receiver 지갑주소
