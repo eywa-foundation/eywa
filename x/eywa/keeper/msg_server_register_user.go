@@ -4,14 +4,19 @@ import (
 	"context"
 
 	"eywa/x/eywa/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) RegisterUser(goCtx context.Context, msg *types.MsgRegisterUser) (*types.MsgRegisterUserResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	var user = types.User{
+		Submitter: msg.Creator,
+		Pubkey:    msg.Pubkey,
+	}
 
-	return &types.MsgRegisterUserResponse{}, nil
+	id := k.CreateUser(ctx, user)
+
+	return &types.MsgRegisterUserResponse{Id: id}, nil
 }
