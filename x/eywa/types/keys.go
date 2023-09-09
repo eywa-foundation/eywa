@@ -17,6 +17,8 @@ const (
 	UserCountKey = "User/count/"
 
 	HandshakeKey = "Handshake/value/"
+
+	RelayServerKey = "RelayServer/value/"
 )
 
 func KeyPrefix(p string) []byte {
