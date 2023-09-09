@@ -89,7 +89,7 @@ message QueryGetChatRequest {
 }
 
 message QueryGetChatResponse {
-  Chat                                   chat       = 1;
+  repeated Chat                                   chat       = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
