@@ -1,0 +1,14 @@
+syntax = "proto3";
+package eywa.eywa;
+
+option go_package = "eywa/x/eywa/types";
+
+message Chat {
+  
+  string chatIndex = 1; 
+  string roomId = 2; 
+  string sender = 3; 
+  string receiver = 4; 
+  string message = 5; 
+  uint64 time = 6; 
+}
