@@ -1,0 +1,7 @@
+syntax = "proto3";
+package eywa.eywa;
+
+option go_package = "eywa/x/eywa/types";
+
+// Msg defines the Msg service.
+service Msg {}
