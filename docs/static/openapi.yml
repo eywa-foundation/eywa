@@ -70885,6 +70885,8 @@ definitions:
         type: string
       serverAddress:
         type: string
+  eywa.eywa.MsgCreateChatResponse:
+    type: object
   eywa.eywa.MsgCreateHandshakeResponse:
     type: object
   eywa.eywa.MsgCreateRelayServerResponse:

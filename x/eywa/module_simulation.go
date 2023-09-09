@@ -35,6 +35,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateRelayServer int = 100
 
+	opWeightMsgCreateChat = "op_weight_msg_create_chat"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateChat int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -96,6 +100,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		eywasimulation.SimulateMsgCreateRelayServer(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgCreateChat int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateChat, &weightMsgCreateChat, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateChat = defaultWeightMsgCreateChat
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateChat,
+		eywasimulation.SimulateMsgCreateChat(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -125,6 +140,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateRelayServer,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				eywasimulation.SimulateMsgCreateRelayServer(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgCreateChat,
+			defaultWeightMsgCreateChat,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				eywasimulation.SimulateMsgCreateChat(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

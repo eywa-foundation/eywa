@@ -9,6 +9,7 @@ service Msg {
   rpc RegisterUser      (MsgRegisterUser     ) returns (MsgRegisterUserResponse     );
   rpc CreateHandshake   (MsgCreateHandshake  ) returns (MsgCreateHandshakeResponse  );
   rpc CreateRelayServer (MsgCreateRelayServer) returns (MsgCreateRelayServerResponse);
+  rpc CreateChat        (MsgCreateChat       ) returns (MsgCreateChatResponse       );
 }
 message MsgRegisterUser {
   string creator = 1;
@@ -35,4 +36,14 @@ message MsgCreateRelayServer {
 }
 
 message MsgCreateRelayServerResponse {}
+
+message MsgCreateChat {
+  string creator  = 1;
+  string roomId   = 2;
+  string receiver = 3;
+  string message  = 4;
+  uint64 time     = 5;
+}
+
+message MsgCreateChatResponse {}
 
